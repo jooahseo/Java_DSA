@@ -27,7 +27,7 @@ public class SortedSquaredArray {
     /**
      * O(n) time | O(n) Space
      * Define new array (same size of the original)
-     * User pointer left, right
+     * Use pointer of left, right
      * compare the absolute values of two
      * whichever bigger go to the end of the new array
      */
