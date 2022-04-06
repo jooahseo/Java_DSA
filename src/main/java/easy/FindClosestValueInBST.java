@@ -2,35 +2,48 @@ package easy;
 
 public class FindClosestValueInBST {
     /**
-     * O(log(n)) time | O(1) space
-     * if tree.value - target < 0 , then go right
-     * if tree.value - target > 0, then go left
+     * O(log(n)) time, O(1) space || Worst: O(n) Time, O(n) space
+     * if tree.value < target, then go right
+     * if tree.value > target, then go left
      * if tree.value - target == 0 , return the value
      * while doing this process,
-     * keep track of the closest value and smallest difference
+     * keep track of the closest value
      */
     public static int findClosestValueInBst(BST tree, int target) {
-        //0 is current closest value, 1 is current smallest diff
-        int[] currentClosestValueAndDiff = {tree.value, Math.abs(tree.value-target)};
-        BST currNode = tree;
-        while(currNode != null){
-            int currentDiff = currNode.value - target;
-            if(currentDiff == 0) return tree.value;
-            if(currentDiff < 0){
-                updateClosestAndDiff(currentClosestValueAndDiff, currNode.value, currentDiff);
-                currNode = tree.right;
+        int closestValue = tree.value;
+        while(tree != null){
+            if(tree.value - target == 0) return tree.value;
+            if(Math.abs(closestValue - target) > Math.abs(tree.value -target)){
+                closestValue = tree.value;
+            }
+            if(tree.value < target){
+                tree = tree.right;
             }else{
-                updateClosestAndDiff(currentClosestValueAndDiff, currNode.value, currentDiff);
-                currNode = tree.left;
+                tree = tree.left;
             }
         }
-        return currentClosestValueAndDiff[0];
+        return closestValue;
     }
 
-    public static void updateClosestAndDiff(int[] currentPair, int currentValue, int currentDiff){
-        if(currentPair[1] > Math.abs(currentDiff)){
-            currentPair[0] = currentValue;
-            currentPair[1] = currentDiff;
+    /**
+     * O(log(n)) Time, O(log(n)) Space || Worst: O(n) Time, O(n) space
+     * call the method itself - recursive way
+     */
+    public static int findClosestValueInBstRecursive(BST tree, int target) {
+        int closestValue = tree.value;
+        return getClosestValueFromBST(tree, target, closestValue);
+    }
+
+    public static int getClosestValueFromBST(BST currentNode, int target, int closestValue){
+        if(currentNode == null)  return closestValue;
+        if(currentNode.value - target == 0 ) return currentNode.value;
+        if(Math.abs(closestValue - target) > Math.abs(currentNode.value - target)){
+            closestValue = currentNode.value;
+        }
+        if(currentNode.value < target){
+            return getClosestValueFromBST(currentNode.right, target, closestValue);
+        }else{
+            return getClosestValueFromBST(currentNode.left, target, closestValue);
         }
     }
 
