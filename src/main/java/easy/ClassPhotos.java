@@ -11,27 +11,20 @@ import java.util.Collections;
  */
 public class ClassPhotos {
     /**
-     * O(nlogn) Time , O(n) space where n is the total students
+     * O(nlogn) Time , O(1) space where n is the total students
      */
     public boolean classPhotos(ArrayList<Integer> redShirtHeights, ArrayList<Integer> blueShirtHeights) {
         Collections.sort(redShirtHeights);
         Collections.sort(blueShirtHeights);
 
-        ArrayList<Integer> tallerGroup = new ArrayList<>();
-        ArrayList<Integer> smallerGroup = new ArrayList<>();
+        String frontGroup = redShirtHeights.get(0) < blueShirtHeights.get(0) ? "RED" : "BLUE";
 
-        if(redShirtHeights.get(redShirtHeights.size() - 1) > blueShirtHeights.get(blueShirtHeights.size() - 1)){
-            tallerGroup = redShirtHeights;
-            smallerGroup = blueShirtHeights;
-        }else if(redShirtHeights.get(redShirtHeights.size() - 1) < blueShirtHeights.get(blueShirtHeights.size() - 1)){
-            tallerGroup = blueShirtHeights;
-            smallerGroup = redShirtHeights;
-        }else if(redShirtHeights.get(redShirtHeights.size() - 1) == blueShirtHeights.get(blueShirtHeights.size() - 1)){
-            return false;
-        }
-
-        for(int i=tallerGroup.size()-1; i>=0; i--){
-            if(tallerGroup.get(i) <= smallerGroup.get(i)) return false;
+        for(int i=0; i<redShirtHeights.size(); i++){
+            if(frontGroup.equals("RED")){
+                if(redShirtHeights.get(i) >= blueShirtHeights.get(i)) return false;
+            }else{
+                if(redShirtHeights.get(i) <= blueShirtHeights.get(i)) return false;
+            }
         }
 
         return true;
