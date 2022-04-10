@@ -11,6 +11,11 @@ public class RemoveDuplicateLinkedList {
         }
     }
 
+    /**
+     * O(n) Time, O(1) space
+     * @param linkedList
+     * @return
+     */
     public LinkedList removeDuplicatesFromLinkedList(LinkedList linkedList) {
         LinkedList currentNode = linkedList;
         while(currentNode != null){
