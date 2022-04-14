@@ -31,7 +31,7 @@ public class FindThreeLargestNumbers {
     }
 
     /**
-     * TODO: add optimal way - WIP
+     * O(n) Time, O(1) Space
      */
     public static int[] findThreeLargestNumbers2(int[] array){
         int[] threeLargest = {array[0], array[1], array[2]};
@@ -43,6 +43,14 @@ public class FindThreeLargestNumbers {
     }
 
     public static void insertLargest(int[] threeLargest, int number){
-
+        int smallestIndex = 0;
+        for(int i=1; i< threeLargest.length; i++){
+            if(threeLargest[i] < threeLargest[smallestIndex]){
+                smallestIndex = i;
+            }
+        }
+        if(number > threeLargest[smallestIndex]){
+            threeLargest[smallestIndex] = number;
+        }
     }
 }
