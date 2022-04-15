@@ -9,6 +9,10 @@ public class PalindromeCheck {
         System.out.println(isPalindrome(input));
         System.out.println(isPalindrome(input2));
         System.out.println(isPalindrome(input3));
+
+        System.out.println(isPalindrome2(input));
+        System.out.println(isPalindrome2(input2));
+        System.out.println(isPalindrome2(input3));
     }
 
     /**
@@ -26,5 +30,17 @@ public class PalindromeCheck {
             right--;
         }
         return true;
+    }
+
+    /**
+     * Using StringBuilder
+     * O(n) Time, O(n) Space
+     */
+    public static boolean isPalindrome2(String str){
+        StringBuilder reversedString = new StringBuilder();
+        for(int i=str.length()-1; i>=0; i--){
+            reversedString.append(str.charAt(i));
+        }
+        return str.equals(reversedString.toString());
     }
 }
