@@ -33,17 +33,16 @@ public class MoveElementToEnd {
 
     /**
      * O(n) Time, O(1) Space
-     * TODO: FIX the index out of bound error
      */
     public static List<Integer> moveElementToEnd(List<Integer> array, int toMove) {
         int left = 0;
         int right = array.size()-1;
 
         while(left < right){
-            while(array.get(left) != toMove){
+            while(array.get(left) != toMove && left < array.size()-1){
                 left ++;
             }
-            while(array.get(right) == toMove){
+            while(array.get(right) == toMove && right > 0){
                 right --;
             }
             //first check if basic condition is broken
