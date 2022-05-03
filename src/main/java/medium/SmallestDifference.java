@@ -1,5 +1,7 @@
 package medium;
 
+import java.util.Arrays;
+
 /**
  * Write a function that takes in two non-empty arrays of integers, finds the pair of numbers(one from each array)
  * whose absolute difference is closest to zero, and returns an array containing these two numbers,
@@ -14,6 +16,10 @@ public class SmallestDifference {
         int[] arrayTwo = {26, 134, 135, 15, 17};
 
         for(int n : smallestDifference(arrayOne, arrayTwo)){
+            System.out.println(n); //print 28, 26
+        }
+
+        for(int n : smallestDifference2(arrayOne, arrayTwo)){
             System.out.println(n); //print 28, 26
         }
     }
@@ -39,12 +45,45 @@ public class SmallestDifference {
     }
 
     /**
-     * TODO: Enhanced approach
+     * O(nlog(n)) Time , O(1) Space where n is the element counts in the array
+     * 1. Sort each array
+     * 2. Use the pointer and find the smallest difference and its pair
      */
     public static int[] smallestDifference2(int[] arrayOne, int[] arrayTwo) {
         int[] smallestDiffPair = new int[2];
         int smallestDifference = Integer.MAX_VALUE;
 
+        Arrays.sort(arrayOne);
+        Arrays.sort(arrayTwo);
+
+        int pointer1 = 0;
+        int pointer2 = 0;
+
+        while(pointer1 < arrayOne.length && pointer2 < arrayTwo.length){
+            int firstNum = arrayOne[pointer1];
+            int secondNum = arrayTwo[pointer2];
+            if(firstNum == secondNum){
+                smallestDiffPair[0] = firstNum;
+                smallestDiffPair[1] = secondNum;
+                break;
+            }
+            int currDiff = Math.abs(firstNum - secondNum);
+            if(currDiff < smallestDifference){
+                smallestDifference = currDiff;
+                smallestDiffPair[0] = firstNum;
+                smallestDiffPair[1] = secondNum;
+            }
+
+            if(firstNum < secondNum){
+                pointer1 ++;
+            }else{ //firstNum > secondNum
+                pointer2 ++;
+            }
+        }
         return smallestDiffPair;
     }
 }
+
+
+
+
