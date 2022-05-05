@@ -10,10 +10,10 @@ package medium;
 public class MonoTonicArray {
     public static void main(String[] args) {
         int[] array = {-1, -5, -10, -1100, -1100, -1101, -1102, -9001};
-        System.out.println(isMonotonic(array)); //expect to print "true"
-        System.out.println(isMonotonic(new int[] {})); //expect to print "true"
-        System.out.println(isMonotonic(new int[] {1})); //expect to print "true"
-        System.out.println(isMonotonic(new int[] {1, 2})); //expect to print "true"
+        System.out.println(isMonotonic2(array)); //expect to print "true"
+        System.out.println(isMonotonic2(new int[] {})); //expect to print "true"
+        System.out.println(isMonotonic2(new int[] {1})); //expect to print "true"
+        System.out.println(isMonotonic2(new int[] {1, 2})); //expect to print "true"
     }
 
     public static boolean isMonotonic(int[] array) {
@@ -46,5 +46,21 @@ public class MonoTonicArray {
             }
         }
         return true;
+    }
+
+    /**
+     * Simplified version - O(n) Time, O(1) Space where n is the element count
+     */
+    public static boolean isMonotonic2(int[] array) {
+        boolean isIncreasing = true;
+        boolean isDecreasing = true;
+        for(int i=0; i<array.length-1; i++){
+            if(array[i] > array[i+1]){
+                isIncreasing = false;
+            }else if(array[i] < array[i+1]){
+                isDecreasing = false;
+            }
+        }
+        return isIncreasing || isDecreasing;
     }
 }
