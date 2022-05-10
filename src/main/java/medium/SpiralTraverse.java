@@ -29,6 +29,16 @@ public class SpiralTraverse {
         for(int n : answer2){
             System.out.print(n); //expect 1
         }
+        System.out.println();
+
+        int[][] array3 = {
+                {1,3,2,5,4,7,6}
+        };
+        List<Integer> answer3 = spiralTraverse(array3);
+        for(int n : answer3){
+            System.out.print(n + " "); //expect 1 3 2 5 4 7 6
+        }
+        System.out.println();
     }
 
     /**
@@ -38,31 +48,35 @@ public class SpiralTraverse {
     public static List<Integer> spiralTraverse(int[][] array) {
         ArrayList<Integer> spiralResult = new ArrayList<>();
         int startRow = 0;
-        int endRow = array[0].length-1;
+        int endRow = array.length-1;
         int startCol = 0;
-        int endCol = array.length-1;
+        int endCol = array[0].length-1;
 
         while(startRow <= endRow && startCol <= endCol){
             // traverse to the 'right' until i >= endCol
-            for(int i=startCol; i<endCol; i++){
+            for(int i=startCol; i<=endCol; i++){
                 spiralResult.add(array[startRow][i]);
             }
+            startRow ++;
+            //edge case
+            if(startRow > endRow) break;
             // traverse to 'down' until i >= endRow
-            for(int i=startRow; i<endRow; i++){
+            for(int i=startRow; i<=endRow; i++){
                 spiralResult.add(array[i][endCol]);
             }
+            endCol--;
+            if(endCol < startCol) break;
             // traverse to 'left' until i <= startCol
-            for(int i=endCol; i > startCol; i--){
+            for(int i=endCol; i >= startCol; i--){
                 spiralResult.add(array[endRow][i]);
             }
-            // traverse to 'up' until i <= startRow
-            for(int i=endRow; i > startRow; i--){
+            endRow--;
+            if(endRow < startRow) break;
+            // traverse to 'up' until i < startRow
+            for(int i=endRow; i >= startRow; i--){
                 spiralResult.add(array[i][startCol]);
             }
-            startRow ++;
-            endRow --;
-            startCol ++;
-            endCol --;
+            startCol++;
         }
         return spiralResult;
     }
