@@ -43,7 +43,6 @@ public class SpiralTraverse {
 
     /**
      * O(n) Time, O(n) Space where n is the total element count of the array
-     * TODO: cover the edge case
      */
     public static List<Integer> spiralTraverse(int[][] array) {
         ArrayList<Integer> spiralResult = new ArrayList<>();
