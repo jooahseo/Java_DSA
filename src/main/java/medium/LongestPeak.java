@@ -13,14 +13,35 @@ public class LongestPeak {
         System.out.println(longestPeak(array)); //expect 6 (0, 10, 6, 5, -1, -3)
     }
 
+    /**
+     * O(n) Time, O(1) Space
+     * @param array
+     * @return
+     */
     public static int longestPeak(int[] array) {
-        int counter = 0;
         int longestPeak = 0;
         //find the peak and count length from there - update the longestPeak
         for(int i=1; i<array.length-1; i++){
-
+            //check if left < current && current > right
+            int left = i - 1;
+            int right = i + 1;
+            int counter = 0;
+            if(array[left] < array[i] && array[i] > array[right]){
+                counter = 3;
+                //if yes -> count all the way left until it's no longer decreasing
+                while(left-1 >=0 && array[left-1] < array[left]){
+                    counter ++;
+                    left --;
+                }
+                // count all the way right until it's no longer decreasing
+                while(right+1 < array.length && array[right] > array[right +1]){
+                    counter ++;
+                    right ++;
+                }
+                i = right;
+                longestPeak = Math.max(counter, longestPeak);
+            }
         }
-
         return longestPeak;
     }
 }
