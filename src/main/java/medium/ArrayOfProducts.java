@@ -19,8 +19,31 @@ public class ArrayOfProducts {
         }
     }
 
+    /**
+     * Brute force approach
+     * O(n^2) Time, O(n) Space
+     */
     public static int[] arrayOfProducts(int[] array) {
         // Write your code here.
-        return new int[] {};
+        int[] arrayOfProduct = new int[array.length];
+        for(int i=0; i<array.length; i++){
+            int answer = 1;
+            for(int j=0; j<array.length; j++){
+                if(j == i) continue;
+                answer *= array[j];
+            }
+            arrayOfProduct[i] = answer;
+        }
+        return arrayOfProduct;
+    }
+
+    /**
+     * TODO: Optimized Solution
+     * @param array
+     * @return
+     */
+    public static int[] arrayOfProducts2(int[] array){
+        int[] arrayOfProduct = new int[array.length];
+        return arrayOfProduct;
     }
 }
