@@ -9,7 +9,7 @@ package medium;
 public class ArrayOfProducts {
     public static void main(String[] args) {
         int[] array = {5, 1, 4, 2};
-        int[] answer = arrayOfProducts(array);
+        int[] answer = arrayOfProducts2(array);
         for(int n : answer){
             System.out.print(n + " "); //expect 8 4 10 20
             // 8 = 1 x 4 x 2
@@ -38,12 +38,31 @@ public class ArrayOfProducts {
     }
 
     /**
-     * TODO: Optimized Solution
+     * Optimized in time solution: O(n) Time, O(n) Space
      * @param array
      * @return
      */
     public static int[] arrayOfProducts2(int[] array){
         int[] arrayOfProduct = new int[array.length];
+
+        //get the left side of the product
+        int[] leftProduct = new int[array.length];
+        int product = 1;
+        for(int i=0; i<array.length; i++){
+            leftProduct[i] = product;
+            product *= array[i];
+        }
+        //get the right side of the product
+        int[] rightProduct = new int[array.length];
+        product = 1;
+        for(int i=array.length-1; i >=0; i--){
+            rightProduct[i] = product;
+            product *= array[i];
+        }
+        //left * right at index i and assign to the array
+        for(int i=0; i<array.length; i++){
+            arrayOfProduct[i] = leftProduct[i] * rightProduct[i];
+        }
         return arrayOfProduct;
     }
 }
